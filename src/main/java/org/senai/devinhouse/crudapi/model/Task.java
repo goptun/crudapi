@@ -4,6 +4,9 @@ import java.time.LocalDate;
 
 import org.senai.devinhouse.crudapi.model.enuns.PriorityEnum;
 import org.senai.devinhouse.crudapi.model.enuns.StatusEnum;
+import org.senai.devinhouse.crudapi.model.transport.TaskDTO;
+
+// entidade (banco de dados)
 
 public class Task {
 
@@ -16,6 +19,10 @@ public class Task {
   private Assignee assignee;
 
   public Task() {
+  }
+
+  public Task(TaskDTO taskDTO) {
+    this.id = taskDTO.id();
   }
 
   public Task(Integer id, String description, LocalDate startDate, LocalDate endDate, StatusEnum status,
