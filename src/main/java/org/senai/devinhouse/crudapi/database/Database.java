@@ -1,12 +1,14 @@
 package org.senai.devinhouse.crudapi.database;
 
+import org.senai.devinhouse.crudapi.exceptions.NotFoundException;
+import org.senai.devinhouse.crudapi.model.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.senai.devinhouse.crudapi.model.Task;
-
 public class Database {
 
+  private static Integer nextId = 0;
   private static List<Task> tasks = new ArrayList<>();
 
   public static void add(Task task) {
@@ -21,7 +23,14 @@ public class Database {
     return Database.tasks;
   }
 
-  public Task get(Integer id) {
-    return Database.tasks.stream().filter(task -> task.getId().equals(id)).findFirst().orElse(null);
+  public static Task get(Integer id) throws NotFoundException {
+    return Database.tasks.stream()
+        .filter(task -> task.getId().equals(id))
+        .findFirst().orElseThrow(() -> new NotFoundException("A tarefa não foi encontrada"));
+  }
+
+  public static Integer setId() {
+    Database.nextId = Database.nextId + 1;
+    return Database.nextId;
   }
 }

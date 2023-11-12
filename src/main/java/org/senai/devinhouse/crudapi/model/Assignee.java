@@ -1,8 +1,14 @@
 package org.senai.devinhouse.crudapi.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class Assignee {
 
+  @NotNull
   private Integer id;
+
+  @NotBlank
   private String name;
 
   public Assignee() {
@@ -29,5 +35,4 @@ public class Assignee {
   public void setName(String name) {
     this.name = name;
   }
-
 }

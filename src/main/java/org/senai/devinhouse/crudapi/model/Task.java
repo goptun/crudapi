@@ -1,12 +1,13 @@
 package org.senai.devinhouse.crudapi.model;
 
-import java.time.LocalDate;
-
-import org.senai.devinhouse.crudapi.model.enuns.PriorityEnum;
-import org.senai.devinhouse.crudapi.model.enuns.StatusEnum;
+import org.senai.devinhouse.crudapi.database.Database;
+import org.senai.devinhouse.crudapi.model.enums.PriorityEnum;
+import org.senai.devinhouse.crudapi.model.enums.StatusEnum;
 import org.senai.devinhouse.crudapi.model.transport.TaskDTO;
 
-// entidade (banco de dados)
+import java.time.LocalDate;
+
+// Classe que representa um objeto de persistência
 
 public class Task {
 
@@ -19,10 +20,17 @@ public class Task {
   private Assignee assignee;
 
   public Task() {
+
   }
 
   public Task(TaskDTO taskDTO) {
-    this.id = taskDTO.id();
+    this.id = Database.setId();
+    this.description = taskDTO.description();
+    this.startDate = taskDTO.startDate();
+    this.endDate = taskDTO.endDate();
+    this.status = taskDTO.status();
+    this.priority = taskDTO.priority();
+    this.assignee = taskDTO.assignee();
   }
 
   public Task(Integer id, String description, LocalDate startDate, LocalDate endDate, StatusEnum status,
@@ -91,5 +99,4 @@ public class Task {
   public void setAssignee(Assignee assignee) {
     this.assignee = assignee;
   }
-
 }
